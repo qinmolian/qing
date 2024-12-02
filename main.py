@@ -4,6 +4,9 @@ from tkinter import ttk
 import os
 import shutil
 
+
+for version in range(1,8,+1):
+    arcigs_version = f""
 home_path = os.path.expanduser("~")
 mytoolboxes_path = os.path.join(home_path, "AppData","Roaming", "ESRI","Desktop10.8","ArcToolbox","My Toolboxes")
 
