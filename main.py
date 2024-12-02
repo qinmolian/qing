@@ -3,11 +3,9 @@ from tkinter import filedialog
 from tkinter import ttk
 import os
 import shutil
-import module1
 
 home_path = os.path.expanduser("~")
 mytoolboxes_path = os.path.join(home_path, "AppData","Roaming", "ESRI","Desktop10.8","ArcToolbox","My Toolboxes")
-
 
 def import_data():
     # Open file dialog to select a file
@@ -17,14 +15,11 @@ def import_data():
     global file_name
     file_name = file_path.split("/")[-1]
     # Insert the file name into the Treeview
-    tree.insert("", "end", values=(file_name, "2", "Unknown Value"))
-    tree.insert("", "end", values=(file_name, "2", "Unknown Value"))
-    tree.insert("", "end", values=(file_name, "2", "Unknown Value"))
+    tree.insert("", "end", values=(file_name, "2"))
 
 def install_data():
-    in_path = 'E:/project/python/TEST'
-    ing_path = os.path.join(mytoolboxes_path,file_name)
-    shutil.copy(file_path,ing_path)
+    in_path = os.path.join(mytoolboxes_path,file_name)
+    shutil.copy(file_path,in_path)
     
 # Create the main window
 root = tk.Tk()
@@ -51,25 +46,23 @@ small_frame.pack(pady=0.5)
 tree = ttk.Treeview(small_frame, columns=("Column 1", "Column 2", "Column 3"), show="headings", height=20)
 
 # Define column headings
-tree.heading("Column 1", text="Data Name")
-tree.heading("Column 2", text="Data Type")
-tree.heading("Column 3", text="Data Value")
+tree.heading("Column 1", text="Data path")
+tree.heading("Column 2", text="Data name")
 
 # Set column widths
 tree.column("Column 1", width=300)
-tree.column("Column 2", width=200)
-tree.column("Column 3", width=100)
+tree.column("Column 2", width=300)
 
 # Add the Treeview to the window
 tree.pack(fill=tk.BOTH, expand=True)
 
 # Create the "Import Data" button (left button)
 import_button = tk.Button(root, text="Import Data", command=import_data, font=("Arial", 14))
-import_button.pack(side="left", padx=10)  # Align the button to the left with padding
+import_button.place(x=25,y=450)  # Align the button to the left with padding
 
 # Create the "Install Toolboxes" button (right button)
 install_toolboxes = tk.Button(root, text="Install Toolboxes", command=install_data, font=("Arial", 14))
-install_toolboxes.place(y=400,x=250)  # Align the button to the right with padding
+install_toolboxes.place(x=450,y=450)  # Align the button to the right with padding
 
 # Start the main loop of the application
 root.mainloop()
