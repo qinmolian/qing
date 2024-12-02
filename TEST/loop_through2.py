@@ -1,4 +1,3 @@
+from tkinter import messagebox
 
-
-for unmber in range(1,10,+1):
-    print(unmber)
+messagebox.showinfo("提示框", "这是一个示例提示框。")
