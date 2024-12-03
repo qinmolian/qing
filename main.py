@@ -23,20 +23,22 @@ def import_data():
     # Open file dialog to select a file
     global file_path
     file_path = filedialog.askopenfilenames(title="Select a File")
-    global file_name
-    for file_path in file_path:
-        file_name = file_path.split("/")[-1]  # 获取文件名
+    global file_name,loop_path
+    for loop_path in file_path:
+        file_name = loop_path.split("/")[-1]  # get file name
     # Insert the file name into the Treeview
         tree.insert("", "end", values=(file_path, file_name))
 
 def install_data():
-    in_path = os.path.join(mytoolboxes_path,file_name)
-    for in_paths in file_path:
-        shutil.copy(in_paths,in_path)
-    messagebox.showinfo("成功导入工具箱")
-    
+    if not file_path:
+        messagebox.showwarning("please import file")
+    for in_path in file_path:
+        file_name1 = os.path.basename(in_path)
+        target_path = os.path.join(mytoolboxes_path,file_name1)
+        shutil.copy(in_path,target_path)
+        
 # Create the main window
-root = tk.Tk()
+root = ctk.CTk()
 root.title("Data Import Window")
 root.geometry("800x500")
 
